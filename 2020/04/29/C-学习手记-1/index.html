@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content=".NET学习之IL语言, 技术、杂谈">
-    <meta name="description" content="IL语言（也称为公共中间语言CIL,或微软中间语言MSIL）是.NET的核心，以.NET Framework平台运行的程序最终都是由IL代码实现。也可以这样理解，无论C/C++、BASIC、Pascal等语言特征如何，在INTEL芯片上最终">
+    <meta name="keywords" content="C#学习手记-1, 技术、杂谈">
+    <meta name="description" content="C#语言作为一种功能强大的语言，在很多地方都有使用（.NET以及Unity等等），在这里总结一下最近的学习成果。
+委托使用委托时要先实例化，和类一样，使用new关键字产生委托的新实例，然后将一个或者多个与委托签名匹配的方法与委托实例关联。随">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>.NET学习之IL语言 | さくら荘のAun3ma</title>
+    <title>C#学习手记-1 | さくら荘のAun3ma</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -281,12 +282,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">.NET学习之IL语言</h1>
+                    <h1 class="description center-align post-title">C#学习手记-1</h1>
                 </div>
             </div>
         </div>
@@ -403,12 +404,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/NET/">
-                                <span class="chip bg-color">.NET</span>
-                            </a>
-                        
-                            <a href="/tags/IL%E8%AF%AD%E8%A8%80/">
-                                <span class="chip bg-color">IL语言</span>
+                            <a href="/tags/C/">
+                                <span class="chip bg-color">C#</span>
                             </a>
                         
                     </div>
@@ -419,12 +416,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/NET/" class="post-category">
-                                .NET
-                            </a>
-                        
-                            <a href="/categories/NET/IL%E8%AF%AD%E8%A8%80/" class="post-category">
-                                IL语言
+                            <a href="/categories/C/" class="post-category">
+                                C#
                             </a>
                         
                     </div>
@@ -436,7 +429,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-08
+                    2020-04-29
                 </div>
                 
 
@@ -458,58 +451,61 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>IL语言（也称为公共中间语言CIL,或微软中间语言MSIL）是.NET的核心，以.NET Framework平台运行的程序最终都是由IL代码实现。<br>也可以这样理解，无论C/C++、BASIC、Pascal等语言特征如何，在INTEL芯片上最终执行的都是Intel汇编指令集。<br>了解IL相关知识能够以较高层次理解.NET工作原理，最大程度利用.NET Framework进行高级程序开发。</p>
-<p>学习IL语言首先需要学会使用ildasm反汇编工具，通过ildasm工具，我们可以将任意的.NET的dll或exe文件反汇编为MSIL代码。</p>
-<h3 id="简单C-程序"><a href="#简单C-程序" class="headerlink" title="简单C#程序"></a>简单C#程序</h3><p>为了更好的解释IL语言，这里我编写了一个十分简单的C#程序，仅用于学习和了解IL语言。</p>
-<pre><code class="C">using System;
-namespace HelloWorld
+                <p>C#语言作为一种功能强大的语言，在很多地方都有使用（.NET以及Unity等等），在这里总结一下最近的学习成果。</p>
+<h3 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h3><p>使用委托时要先实例化，和类一样，使用new关键字产生委托的新实例，然后将一个或者多个与委托签名匹配的方法与委托实例关联。随后调用委托时，就会调用所有与委托实例关联的方法。</p>
+<h4 id="使用delegate关键字创建委托类型"><a href="#使用delegate关键字创建委托类型" class="headerlink" title="使用delegate关键字创建委托类型"></a>使用delegate关键字创建委托类型</h4><pre><code class="C">public delegate void BoiledEventHandler(Object sender, BoiledEventArgs e);</code></pre>
+<h4 id="创建委托实例并将方法绑定到委托上"><a href="#创建委托实例并将方法绑定到委托上" class="headerlink" title="创建委托实例并将方法绑定到委托上"></a>创建委托实例并将方法绑定到委托上</h4><pre><code class="C">BoiledEventHandler delegater = function_1;
+delegater(sender, event_args);</code></pre>
+<p>当然，一个委托可以绑定多个方法，并将多个方法一次执行。</p>
+<p>我们可以使用+=绑定方法，使用-=取消绑定。</p>
+<pre><code class="C">BoiledEventHandler delegater = new BoiledEventHandler(function_1)
+delegater += function_2
+delegater -= function_1</code></pre>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件本身是委托类型，由于委托的优越性，使用事件可以让我们更好地处理侦听、观察这类行为，为事件处理提供便利。</p>
+<h4 id="使用event关键字声明一个事件"><a href="#使用event关键字声明一个事件" class="headerlink" title="使用event关键字声明一个事件"></a>使用event关键字声明一个事件</h4><pre><code class="C">public event BoiledEventHandler Boiled;</code></pre>
+<h4 id="事件的触发与参数"><a href="#事件的触发与参数" class="headerlink" title="事件的触发与参数"></a>事件的触发与参数</h4><p>通常一个事件需要一个或多个触发函数，同时由于一个事件可以绑定多个方法，方法之间的参数各不相同，所以这里使用.NET库提供的一个带有泛型参数的时间处理委托。<br><em>public delegate void EventHandler<TEventArgs>(object sender,TEventArgs e);   TEventArgs 是一个泛型参数</em></p>
+<pre><code class="C">public class BoiledEventArgs : EventArgs
 {
-    class Hello
+    public readonly int temperature;
+    public BoiledEventArgs(int temperature)
     {
-        static void Main(string[] args)
-        {
-            /*
-            * 这是一个示例程序
-            * 用以熟悉C#最基本的格式内容以及IL语言
-            */
-            Console.WriteLine(&quot;请输入你的名字!&quot;);
-            string name = Console.ReadLine();
+        this.temperature = temperature;
+    }
+}
 
-            Console.WriteLine(&quot;欢迎你!{0}&quot;, name);
-
-            string s = &quot;Hello&quot;;
-            string t = &quot; &quot;;
-            string u = s + t + &quot;World!&quot;;
-            Console.WriteLine(u);
-
-            Console.WriteLine(&quot;请输入0或1！&quot;);
-            String flag = Console.ReadLine();
-            int opc = int.Parse(flag);
-            if (opc == 1)
-            {
-                Console.WriteLine(&quot;True!&quot;);
-            }
-            else
-            {
-                Console.WriteLine(&quot;False!&quot;);
-            }
-        }
+protected virtual void OnBoiled(BoiledEventArgs e)
+{
+    if (Boiled != null)
+    {
+        Boiled(this, e);
     }
 }</code></pre>
-<h3 id="IL代码解读"><a href="#IL代码解读" class="headerlink" title="IL代码解读"></a>IL代码解读</h3><p>在对上面的简单C#程序的IL代码进行解读之前，这边有一份完整的IL语言指令说明<br><a href="https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2IvcyFBaTJvblZEUlVyOWtrQjdOaEpZX0NBa1Z4ZEIyP2U9QTZjT3dL.pdf" target="_blank" rel="noopener">戳这里下载</a></p>
-<h4 id="程序的IL代码结构"><a href="#程序的IL代码结构" class="headerlink" title="程序的IL代码结构"></a>程序的IL代码结构</h4><p>使用ildasm反汇编工具后得到的结构如图一所示：<br><img src="https://ae01.alicdn.com/kf/H16eba55e9365417eb813090be8035bacJ.png" alt="图一"></p>
-<h4 id="MANIFEST程序清单文件"><a href="#MANIFEST程序清单文件" class="headerlink" title="MANIFEST程序清单文件"></a>MANIFEST程序清单文件</h4><p>程序清单文件的内容如图二所示：<br><img src="https://ae01.alicdn.com/kf/Hea03f360caff4b53801bc5d196bdf1daS.png" alt="图二"></p>
-<p>其中，开头的.assembly extern mscorlib表示程序集引用的外部文件是mscorlib。<br>.publickeytoken = （）指定所引用的程序集的实际公钥标记。<br>.ver指定引用程序集的版本。<br>.assembly ‘简单程序集’的内部内容则代表程序集。</p>
-<h4 id="HelloWorld-Hello拓展"><a href="#HelloWorld-Hello拓展" class="headerlink" title="HelloWorld.Hello拓展"></a>HelloWorld.Hello拓展</h4><p>HelloWorld.Hello的拓展内容如图三所示：<br><img src="https://ae01.alicdn.com/kf/He09385c3ed8048e88aa3a22ec2820e2cG.png" alt="图三"></p>
-<p>其中，.class表示Hello是一个类。<br>extends [mscorlib]System.Object表示Hello类继承自程序集mscorlib中的System.Object类。<br>private表示访问权限为私有。<br>auto表明程序加载的时候内存布局是由CLR决定，而不是程序本身控制。<br>ansi表明类的编码为ansi编码。<br>beforefieldinit表明CLR可以在第一次访问静态字段之前的任何时刻执行类型构造函数，这样可以提高性能。</p>
-<h4 id="构造函数ctor"><a href="#构造函数ctor" class="headerlink" title="构造函数ctor"></a>构造函数ctor</h4><p>构造函数.ctor中的内容如图四所示：<br><img src="https://ae01.alicdn.com/kf/H640317c413b44c7484005c146fb29047d.png" alt="图四"></p>
-<p>其中，.ctor表示构造函数。<br>cil managed表示方法体重的代码是IL代码，并且是托管代码，运行在CLR运行库中。<br>.maxstack表示执行构造函数时，Evaluation Stack可容纳数据项的最大个数。Evaluation Stack是保存方法中所需变量值的一块内存区域，在方法执行结束时被清空或存储一个返回值。这里Evaluation Stack为8。<br>IL_0000为代码行开头，ldarg.0指令意为加载第一个成员参数。<br>IL_0001：Call  instance void [mscorlib]System.Object::.ctor()意为调用System.Object类的构造函数。通常Call指令一般用于调用静态函数。<br>IL_0006：nop表示不执行任何操作。<br>IL_0007：ret指令表示执行完毕返回。</p>
-<h4 id="Main函数"><a href="#Main函数" class="headerlink" title="Main函数"></a>Main函数</h4><p>由于Main函数的IL代码较长，下面分块解读，首先IL_标记之前的内容如图五所示：<br><img src="https://ae01.alicdn.com/kf/H0f49a477cf7f4cb289395425876adffap.png" alt="图五"></p>
-<p>其中，hidebysig指令表示如果当前类作为父类，用该指令标记的方法将不会被子类继承。<br>.entrypoint指令表示该函数是程序的入口函数，每个托管应用程序都有且只有一个入口函数，CLR加载的时候首先从.entrypoint函数开始执行。<br>.local init指令定义用到的变量，可以看到这里一共用到5个String、1个int和1个bool类型的变量。</p>
-<p>下面解释IL_标记之后的部分，内容如图六和图七所示：<br><img src="https://ae01.alicdn.com/kf/H13cb6f6ba56e490ba8f51dbb8188e7b7Y.png" alt="图六"></p>
-<p><img src="https://ae01.alicdn.com/kf/Hfb75c840a1d14dc1866a097e4f5d1ea0Y.png" alt="图七"></p>
-<p>IL_0000：nop指令表示不执行任何操作。<br>IL_0001：ldstr  bytearray (F7 8B 93 8F 65 51 60 4F 84 76 0D 54 57 5B 21 00 )指令表示将bytearray中的内容的Reference放进Evaluation Stack。bytearray中的内容即“请输入你的名字！”的十六进制编码。<br>IL_0006：Call  void [mscorlib] System.Console::WriteLine (string)指令表示调用System.Console::WriteLine函数并取出Evaluation Stack中的第一个值作为参数。即输出“请输入你的名字！”。<br>IL_000b：nop指令表示不执行任何操作。<br>IL_000c：Call  string [mscorlib]System.Console::ReadLine()指令表示调用System.Console::ReadLine()函数。该函数将获得的值放入Evaluation Stack。<br>IL_0011：stloc.0指令将Evaluation Stack中刚刚通过System.Console::ReadLine()函数读入的字符串放入变量V0中。<br>IL_0012：ldstr  bytearray (22 6B CE 8F 60 4F 21 00 7B 00 30 00 7D 00 ) 指令表示将bytearray中的内容的Reference放进Evaluation Stack。bytearray中的内容即“欢迎你!”的十六进制编码。<br>IL_0017：ldloc.0指令将V0变量的值放入Evaluation Stack。<br>IL_0018：call  void [mscorlib] System.Console::WriteLine (string,object)指令调用System.Console::WriteLine函数并取Evaluation Stack中的前两个值作为参数。即输出”欢迎你!xxx”。<br>IL_001d：nop指令表示不执行任何操作。<br>IL_001e：ldstr  “Hello” 指令表示将字符串“Hello”的Reference放进Evaluation Stack。<br>IL_0023：stloc.1指令将Evaluation Stack中刚刚放入的字符串“Hello”放入变量V1中。<br>IL_0024：ldstr  “ ”指令表示将字符串“ ”的Reference放进Evaluation Stack中。<br>IL_0029：stloc.2指令将Evaluation Stack中刚刚放入的字符串“ ”放入变量V2中。<br>IL_002a：ldloc.1指令将V1中的值放入Evaluation Stack。<br>IL_002b：ldloc.2指令将V2中的值放入Evaluation Stack。<br>IL_002c：ldstr  “World”指令表示将字符串“World”的Reference放进Evaluation Stack中。<br>IL_0031：call  string [mscorlib] System.String::Concat (string,string,string)指令调用System.String::Concat函数并取Evaluation Stack的前三个值作为参数。即对三个字符串做拼接。<br>IL_0036：stloc.3指令将刚刚拼接好的字符串存入变量V3中。<br>IL_0037：ldloc.3指令将V3中的值放入Evaluation Stack。<br>IL_0038：call  void [mscorlib] System.Console::WriteLine (string)指令调用System.Console::WriteLine函数并取Evaluation Stack中的第一个值作为参数。即输出“Hello World！”。<br>IL_003d：nop指令表示不进行任何操作。<br>IL_003e：ldstr  bytearray (F7 8B 93 8F 65 51 30 00 16 62 31 00 01 FF ) 指令表示将bytearray中的内容的Reference放进Evaluation Stack。bytearray中的内容即“请输入0或1！”的十六进制编码。<br>IL_0043：call  void [mscorlib] System.Console::WriteLine (string)指令调用System.Console::WriteLine函数，并取Evaluation Stack中的第一个值作为参数。即输出“请输入0或1！”。<br>IL_0048：nop指令表示不进行任何操作。<br>IL_0049：call  string [mscorlib]System.Console::ReadLine()指令调用System.Console::ReadLine函数。<br>IL_004e：stloc.s  V_4指令将读到的值放入V4变量中。<br>IL_0050：ldloc.s  V_4指令将V4的值放入Evaluation Stack。<br>IL_0052：call  int32 [mscorlib]System.Int32::Parse(string)指令调用System.Int32::Parse函数，并使用Evaluation Stack中的第一个值作为参数。即将输入的字符串转换为int类型。<br>IL_0057：stloc.s  V_5指令将转换过后的值存入V5变量。<br>IL_0059：ldloc.s  V_5指令将V5中的值放入Evaluation Stack。<br>IL_005b：ldc.i4.1指令表示在Evaluation Stack中放入一个4 byte的常数，其值为1。<br>IL_005c：ceq指令比较Evaluation Stack中的前两个值。如果这两个值相等，则将整数值1 (int32)推送到Evaluation Stack上；否则，将0 (int32)推送到Evaluation Stack上。<br>IL_005e：stloc.s  V_6指令将Evaluation Stack中的第一个值取出，存入V6变量。<br>IL_0060：ldloc.s  V_6指令将V6中的值放入Evaluation Stack。<br>IL_0062：brfalse.s  IL_0073指令表示如果value为false、空引用或零，则将控制转移到IL_0073。<br>IL_0064：nop指令表示不进行任何操作。<br>IL_0065：ldstr  “True！”指令将字符串“True！”的Reference放入Evaluation Stack中。<br>IL_006a：call  void [mscorlib]System.Console::WriteLine (string)指令调用System.Console::WriteLine函数，并取Evaluation Stack中的第一个值作为参数。即输出“True！”。<br>IL_006f：nop指令表示不执行任何操作。<br>IL_0070：nop指令表示不执行任何操作。<br>IL_0071：br.s  IL_0080指令表示无条件转移到IL_0080指令。<br>IL_0073：nop指令表示不执行任何操作。<br>IL_0074：ldstr  “False！”指令将字符砖“False！”的Reference放入Evaluation Stack。<br>IL_0079：call  void [mscorlib]System.Console::WriteLine (string)指令调用System.Console::WriteLine函数，并取Evaluation Stack中的第一个值作为参数。即输出“False！”。<br>IL_007e：nop指令表示不执行任何操作。<br>IL_007f：nop指令表示不执行任何操作。<br>IL_0080：ret指令表示执行结束返回。由于Main函数是Void类型，所以没有返回值且Evaluation Stack为空，程序正常结束。</p>
-<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>最后在提供一点有关IL语言解读的小资料<br><a href="https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2IvcyFBaTJvblZEUlVyOWtrQ2lwQVluUUtTYlUzREI3P2U9MGtFc2ln.pdf" target="_blank" rel="noopener">戳这里下载</a></p>
+<h3 id="自动实现的属性"><a href="#自动实现的属性" class="headerlink" title="自动实现的属性"></a>自动实现的属性</h3><h4 id="属性的声明"><a href="#属性的声明" class="headerlink" title="属性的声明"></a>属性的声明</h4><pre><code class="C#">public class Product
+{
+    public decimal Price { get; set; }
+}</code></pre>
+<h4 id="属性的使用"><a href="#属性的使用" class="headerlink" title="属性的使用"></a>属性的使用</h4><pre><code class="C#">Product p2 = new Product { Price = 3.0M };</code></pre>
+<h3 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h3><h4 id="扩展方法的声明"><a href="#扩展方法的声明" class="headerlink" title="扩展方法的声明"></a>扩展方法的声明</h4><pre><code class="C#">public static void Dump(this Product p)
+{
+    Console.WriteLine(&quot;Extension Method Dump: {0},{1}&quot;, p.Name, p.Price);
+}</code></pre>
+<p>其中，参数类型Product即为可以使用该扩展方法的类型，注意添加this关键字。</p>
+<h4 id="扩展方法的使用"><a href="#扩展方法的使用" class="headerlink" title="扩展方法的使用"></a>扩展方法的使用</h4><pre><code class="C#">Product p = new Product();
+p.Dump();</code></pre>
+<h3 id="匿名类型"><a href="#匿名类型" class="headerlink" title="匿名类型"></a>匿名类型</h3><p>匿名类型就是指没有名字的类，这样的类不能被引用，且只能通过new关键字来创建。</p>
+<h4 id="匿名类型的优点"><a href="#匿名类型的优点" class="headerlink" title="匿名类型的优点"></a>匿名类型的优点</h4><ol>
+<li>能够很方便的将一组数据封装到单个对象中，并且你不必去定义这个对象类型。</li>
+<li>使用new关键字，创建简单方便。</li>
+</ol>
+<h4 id="匿名类型的使用"><a href="#匿名类型的使用" class="headerlink" title="匿名类型的使用"></a>匿名类型的使用</h4><pre><code class="C#">var py = new { Name = &quot;Dainne&quot;, Price = 50.0M };</code></pre>
+<h3 id="var隐式类型"><a href="#var隐式类型" class="headerlink" title="var隐式类型"></a>var隐式类型</h3><p>我们看到刚才在声明py这个匿名类型实例时使用的是var关键字，那么var到底有什么用呢？</p>
+<p>var隐式类型，我们也可以认为var就是不指定类型，之后编译器会帮助我们自动选择合适的数据类型，使用var可以有效提高编码效率。</p>
+<h4 id="var的使用规则"><a href="#var的使用规则" class="headerlink" title="var的使用规则"></a>var的使用规则</h4><ol>
+<li>最终类型由编译器给出。</li>
+<li>一般情况下，需要给与var类型的变量初始值。（不能为空值）</li>
+<li>只能够声明一次。</li>
+<li>不能作为参数或者返回值。</li>
+</ol>
 
             </div>
             <hr/>
@@ -535,7 +531,7 @@ namespace HelloWorld
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://aun3ma.github.io/2020/04/08/NET%E5%AD%A6%E4%B9%A0%E4%B9%8BIL%E8%AF%AD%E8%A8%80/">http://aun3ma.github.io/2020/04/08/NET%E5%AD%A6%E4%B9%A0%E4%B9%8BIL%E8%AF%AD%E8%A8%80/</a>
+                    <a href="http://aun3ma.github.io/2020/04/29/C-%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0-1/">http://aun3ma.github.io/2020/04/29/C-%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -573,12 +569,8 @@ namespace HelloWorld
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/NET/">
-                                    <span class="chip bg-color">.NET</span>
-                                </a>
-                            
-                                <a href="/tags/IL%E8%AF%AD%E8%A8%80/">
-                                    <span class="chip bg-color">IL语言</span>
+                                <a href="/tags/C/">
+                                    <span class="chip bg-color">C#</span>
                                 </a>
                             
                         </div>
@@ -748,20 +740,22 @@ namespace HelloWorld
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/29/C-%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0-1/">
+                <a href="/2020/04/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AD%A6%E4%B9%A0-%E8%AE%A4%E8%AF%86%E8%81%9A%E7%B1%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="C#学习手记-1">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="数据分析与挖掘-认识聚类">
                         
-                        <span class="card-title">C#学习手记-1</span>
+                        <span class="card-title">数据分析与挖掘-认识聚类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            C#语言作为一种功能强大的语言，在很多地方都有使用（.NET以及Unity等等），在这里总结一下最近的学习成果。
-委托使用委托时要先实例化，和类一样，使用new关键字产生委托的新实例，然后将一个或者多个与委托签名匹配的方法与委托实例关联。随
+                            最近做了一个聚类作业，初步了解了一些聚类算法，这里和大家分享一下。
+使用python语言。
+作业数据与资料戳这里下载
+Q1Q1比较简单，对于数据做必要处理后直接使用K-Means即可，唯一的问题是大部分的库中的K-Means算法不支持自定义
                         
                     </div>
                     <div class="publish-info">
@@ -772,8 +766,12 @@ namespace HelloWorld
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/C/" class="post-category">
-                                    C#
+                            <a href="/categories/Python/" class="post-category">
+                                    Python
+                                </a>
+                            
+                            <a href="/categories/%E8%81%9A%E7%B1%BB/" class="post-category">
+                                    聚类
                                 </a>
                             
                             
@@ -783,8 +781,12 @@ namespace HelloWorld
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C#</span>
+                    <a href="/tags/%E8%81%9A%E7%B1%BB/">
+                        <span class="chip bg-color">聚类</span>
+                    </a>
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
                 </div>
@@ -798,34 +800,35 @@ namespace HelloWorld
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/06/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E4%B9%8Bhexo-theme-matery/">
+                <a href="/2020/04/08/NET%E5%AD%A6%E4%B9%A0%E4%B9%8BIL%E8%AF%AD%E8%A8%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Hexo博客主题之hexo-theme-matery">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt=".NET学习之IL语言">
                         
-                        <span class="card-title">Hexo博客主题之hexo-theme-matery</span>
+                        <span class="card-title">.NET学习之IL语言</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            给大家推荐Hexo中一个非常不错的静态博客主题，就是我现在使用的这个hexo-theme-matery啦！
-戳这里 移步下载地址和教程
-什么？你说你还没接触过Hexo？（叹气）那没事了~
-什么是Hexo额，说不太清楚，甩你个连接自己看吧~传
+                            IL语言（也称为公共中间语言CIL,或微软中间语言MSIL）是.NET的核心，以.NET Framework平台运行的程序最终都是由IL代码实现。也可以这样理解，无论C/C++、BASIC、Pascal等语言特征如何，在INTEL芯片上最终
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98/" class="post-category">
-                                    博客主题
+                            <a href="/categories/NET/" class="post-category">
+                                    .NET
+                                </a>
+                            
+                            <a href="/categories/NET/IL%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    IL语言
                                 </a>
                             
                             
@@ -835,12 +838,12 @@ namespace HelloWorld
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/hexo-theme-matery/">
-                        <span class="chip bg-color">hexo-theme-matery</span>
+                    <a href="/tags/NET/">
+                        <span class="chip bg-color">.NET</span>
                     </a>
                     
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98/">
-                        <span class="chip bg-color">博客主题</span>
+                    <a href="/tags/IL%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">IL语言</span>
                     </a>
                     
                 </div>
