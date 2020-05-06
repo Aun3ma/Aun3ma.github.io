@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="python数据结构之DataFrame, 技术、杂谈">
-    <meta name="description" content="python数据结构之DataFrame | さくら荘のAun3ma">
+    <meta name="description" content="最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。
+什么是PandasPandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -401,12 +402,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/pandas/">
+                                <span class="chip bg-color">pandas</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/python/" class="post-category">
+                                python
+                            </a>
+                        
+                            <a href="/categories/python/pandas/" class="post-category">
+                                pandas
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -437,7 +455,52 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。</p>
+<h3 id="什么是Pandas"><a href="#什么是Pandas" class="headerlink" title="什么是Pandas"></a>什么是Pandas</h3><p>Pandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数据模型。提供了高效地操作大型数据集所需的工具。Pandas提供了大量能使我们快速便捷地处理数据的函数和方法。Pandas是使python成为强大而高效的数据分析环境的重要因素之一。</p>
+<h3 id="什么是DataFrame"><a href="#什么是DataFrame" class="headerlink" title="什么是DataFrame"></a>什么是DataFrame</h3><p>DataFrame是一种表格型数据类型，它含有一组有序的列，每列可以是不同的值。DataFrame拥有行索引和列索引，可以看成是由Series构成的字典。</p>
+<h4 id="DataFrame的创建"><a href="#DataFrame的创建" class="headerlink" title="DataFrame的创建"></a>DataFrame的创建</h4><p>DataFrame的创建方式通常有两种：</p>
+<ol>
+<li><p>通过字典创建</p>
+<pre><code>data = {
+ &#39;state&#39;:[&#39;Ohio&#39;,&#39;Ohio&#39;,&#39;Ohio&#39;,&#39;Nevada&#39;,&#39;Nevada&#39;],
+ &#39;year&#39;:[2000,2001,2002,2001,2002],
+ &#39;pop&#39;:[1.5,1.7,3.6,2.4,2.9]
+}
+frame = pd.DataFrame(data)</code></pre></li>
+<li><p>通过读取文件创建</p>
+<pre><code>data_frame = pd.read_excel(file)</code></pre></li>
+</ol>
+<h4 id="DataFrame的功能"><a href="#DataFrame的功能" class="headerlink" title="DataFrame的功能"></a>DataFrame的功能</h4><ol>
+<li><p>选取数据<br>我们可以通过列索引或行索引来选取若干列或若干行。</p>
+<pre><code>frame2[&#39;year&#39;]
+#输出
+one      2000
+two      2001
+three    2002
+four     2001
+five     2002</code></pre><pre><code>data[[&#39;two&#39;,&#39;three&#39;]]
+#输出
+ two three
+Ohio    1   2
+Colorado    5   6
+Utah    9   10</code></pre><p>也可以使用iloc和loc方法进行切片和精确定位，其中loc使用标签，iloc使用下标。</p>
+<pre><code>data.loc[&#39;Colorado&#39;,[&#39;two&#39;,&#39;three&#39;]]
+data.iloc[0:3,2]</code></pre></li>
+<li><p>修改数据<br>我们可以通过列索引对一列数据进行修改，也可以使用series对一行或多行数据进行修改，也可以使用iloc精确定位后对相应位置的数据进行修改。</p>
+<pre><code>frame2[&#39;debt&#39;]=16.5</code></pre><pre><code>frame2.debt = np.arange(5)</code></pre><pre><code>val = pd.Series([-1.2,-1.5,-1.7],index=[&#39;two&#39;,&#39;four&#39;,&#39;five&#39;])
+frame2[&#39;debt&#39;] = val</code></pre></li>
+<li><p>重建索引<br>当我们对一个DataFrame进行排序等操作后可能会打乱该DataFrame的行索引或列索引，此时我们需要使用reindex方法进行重索引。</p>
+<pre><code>frame2 = frame.reindex([1,2,4,5])</code></pre><pre><code>states = [&#39;Texas&#39;,&#39;Utah&#39;,&#39;California&#39;]
+frame.reindex(columns=states)</code></pre></li>
+<li><p>删除轴上的数据<br>这里需要引入一个概念：轴。<br>我们可以认为每一行或是每一列为一条轴，其中参数axis指定是行还是列，axis为1时指定列，axis为0时指定行。<br>删除轴上的数据只需要使用drop方法即可。</p>
+<pre><code>frame.drop([&#39;Ohio&#39;],axis=1)</code></pre></li>
+<li><p>运算<br>DataFrame之间可以进行矩阵运算</p>
+<pre><code>df1 + df2</code></pre></li>
+<li><p>排序<br>使用sort_index方法可以根据任意轴的索引进行排序，通过ascending参数指定升降序。</p>
+<pre><code>frame.sort_index(1,ascending=False)</code></pre></li>
+</ol>
+<p>有关DataFrame的内容就暂且讲到这里，希望对大家的学习有所帮助。</p>
+
             </div>
             <hr/>
 
@@ -499,7 +562,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/pandas/">
+                                    <span class="chip bg-color">pandas</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -680,7 +747,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。
+什么是PandasPandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数
                         
                     </div>
                     <div class="publish-info">
@@ -689,13 +757,29 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Aun3ma
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            <a href="/categories/python/pandas/" class="post-category">
+                                    pandas
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pandas/">
+                        <span class="chip bg-color">pandas</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
