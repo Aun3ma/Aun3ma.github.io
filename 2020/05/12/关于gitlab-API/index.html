@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="python数据结构之DataFrame, 技术、杂谈">
-    <meta name="description" content="最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。
-什么是PandasPandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数">
+    <meta name="keywords" content="关于gitlab API, 技术、杂谈">
+    <meta name="description" content="GitLab是一个强大的代码托管、集成与开发平台。而当我们需要将GitLab的部分功能集成到我们自己的项目中时，我们就需要接触GitLab API。
+GitLab API提供哪些功能GitLab是一个十分成熟的平台，其提供的API也涵盖了平">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>python数据结构之DataFrame | さくら荘のAun3ma</title>
+    <title>关于gitlab API | さくら荘のAun3ma</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -282,12 +282,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">python数据结构之DataFrame</h1>
+                    <h1 class="description center-align post-title">关于gitlab API</h1>
                 </div>
             </div>
         </div>
@@ -404,8 +404,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/pandas/">
-                                <span class="chip bg-color">pandas</span>
+                            <a href="/tags/GitLab/">
+                                <span class="chip bg-color">GitLab</span>
                             </a>
                         
                     </div>
@@ -416,12 +416,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/python/" class="post-category">
-                                python
-                            </a>
-                        
-                            <a href="/categories/python/pandas/" class="post-category">
-                                pandas
+                            <a href="/categories/GitLab/" class="post-category">
+                                GitLab
                             </a>
                         
                     </div>
@@ -433,7 +429,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-06
+                    2020-05-12
                 </div>
                 
 
@@ -455,51 +451,128 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。</p>
-<h3 id="什么是Pandas"><a href="#什么是Pandas" class="headerlink" title="什么是Pandas"></a>什么是Pandas</h3><p>Pandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数据模型。提供了高效地操作大型数据集所需的工具。Pandas提供了大量能使我们快速便捷地处理数据的函数和方法。Pandas是使python成为强大而高效的数据分析环境的重要因素之一。</p>
-<h3 id="什么是DataFrame"><a href="#什么是DataFrame" class="headerlink" title="什么是DataFrame"></a>什么是DataFrame</h3><p>DataFrame是一种表格型数据类型，它含有一组有序的列，每列可以是不同的值。DataFrame拥有行索引和列索引，可以看成是由Series构成的字典。</p>
-<h4 id="DataFrame的创建"><a href="#DataFrame的创建" class="headerlink" title="DataFrame的创建"></a>DataFrame的创建</h4><p>DataFrame的创建方式通常有两种：</p>
-<ol>
-<li><p>通过字典创建</p>
-<pre><code>data = {
- &#39;state&#39;:[&#39;Ohio&#39;,&#39;Ohio&#39;,&#39;Ohio&#39;,&#39;Nevada&#39;,&#39;Nevada&#39;],
- &#39;year&#39;:[2000,2001,2002,2001,2002],
- &#39;pop&#39;:[1.5,1.7,3.6,2.4,2.9]
-}
-frame = pd.DataFrame(data)</code></pre></li>
-<li><p>通过读取文件创建</p>
-<pre><code>data_frame = pd.read_excel(file)</code></pre></li>
-</ol>
-<h4 id="DataFrame的功能"><a href="#DataFrame的功能" class="headerlink" title="DataFrame的功能"></a>DataFrame的功能</h4><ol>
-<li><p>选取数据<br>我们可以通过列索引或行索引来选取若干列或若干行。</p>
-<pre><code>frame2[&#39;year&#39;]
-#输出
-one      2000
-two      2001
-three    2002
-four     2001
-five     2002</code></pre><pre><code>data[[&#39;two&#39;,&#39;three&#39;]]
-#输出
- two three
-Ohio    1   2
-Colorado    5   6
-Utah    9   10</code></pre><p>也可以使用iloc和loc方法进行切片和精确定位，其中loc使用标签，iloc使用下标。</p>
-<pre><code>data.loc[&#39;Colorado&#39;,[&#39;two&#39;,&#39;three&#39;]]
-data.iloc[0:3,2]</code></pre></li>
-<li><p>修改数据<br>我们可以通过列索引对一列数据进行修改，也可以使用series对一行或多行数据进行修改，也可以使用iloc精确定位后对相应位置的数据进行修改。</p>
-<pre><code>frame2[&#39;debt&#39;]=16.5</code></pre><pre><code>frame2.debt = np.arange(5)</code></pre><pre><code>val = pd.Series([-1.2,-1.5,-1.7],index=[&#39;two&#39;,&#39;four&#39;,&#39;five&#39;])
-frame2[&#39;debt&#39;] = val</code></pre></li>
-<li><p>重建索引<br>当我们对一个DataFrame进行排序等操作后可能会打乱该DataFrame的行索引或列索引，此时我们需要使用reindex方法进行重索引。</p>
-<pre><code>frame2 = frame.reindex([1,2,4,5])</code></pre><pre><code>states = [&#39;Texas&#39;,&#39;Utah&#39;,&#39;California&#39;]
-frame.reindex(columns=states)</code></pre></li>
-<li><p>删除轴上的数据<br>这里需要引入一个概念：轴。<br>我们可以认为每一行或是每一列为一条轴，其中参数axis指定是行还是列，axis为1时指定列，axis为0时指定行。<br>删除轴上的数据只需要使用drop方法即可。</p>
-<pre><code>frame.drop([&#39;Ohio&#39;],axis=1)</code></pre></li>
-<li><p>运算<br>DataFrame之间可以进行矩阵运算</p>
-<pre><code>df1 + df2</code></pre></li>
-<li><p>排序<br>使用sort_index方法可以根据任意轴的索引进行排序，通过ascending参数指定升降序。</p>
-<pre><code>frame.sort_index(1,ascending=False)</code></pre></li>
-</ol>
-<p>有关DataFrame的内容就暂且讲到这里，希望对大家的学习有所帮助。</p>
+                <p>GitLab是一个强大的代码托管、集成与开发平台。而当我们需要将GitLab的部分功能集成到我们自己的项目中时，我们就需要接触GitLab API。</p>
+<h3 id="GitLab-API提供哪些功能"><a href="#GitLab-API提供哪些功能" class="headerlink" title="GitLab API提供哪些功能"></a>GitLab API提供哪些功能</h3><p>GitLab是一个十分成熟的平台，其提供的API也涵盖了平台的绝大部分功能，包括仓库管理、版本控制等等，这为我们使用与集成GitLab提供了相当多的便利。但是，由于其平台本身的功能十分强大，导致API的数量较多，有些使用起来也有点复杂。</p>
+<a href="https://docs.gitlab.com/ce/api/" title="" target="">戳这里</a> 移步GitLab API官方说明文档
+
+<h3 id="GitLab-API封装包"><a href="#GitLab-API封装包" class="headerlink" title="GitLab API封装包"></a>GitLab API封装包</h3><p>如果大家觉得GitLab API的使用有些复杂，或是不太了解各种API的请求方式，这里提供一个GitLab API的Java封装包。但是由于长时间没有更新，这个包包括的功能不是特别多，并且需要GitLab支持v3版本的接口（现在基本是v4）。如果对于语言没有特别的要求，可以考虑使用python，python提供完全能的GitLab APi封装。</p>
+<a href="https://gitlab.com/mfriedenhagen/java-gitlab-api" title="" target="">戳这里</a> 移步封装包仓库
+
+<h3 id="部分API的使用示例"><a href="#部分API的使用示例" class="headerlink" title="部分API的使用示例"></a>部分API的使用示例</h3><p>介绍完GitLab API后，下面示范一下部分API的使用。</p>
+<h4 id="获取Private-Token"><a href="#获取Private-Token" class="headerlink" title="获取Private Token"></a>获取Private Token</h4><p>Private Token类似于登录时的账号密码，每一个GitLab账号都拥有唯一的Private Token，在所有的API请求的头部加入”PRIVATE-TOKEN”：privateToken或是在请求中添加参数private_token=privateToken就能够免登录访问GitLab的各种服务，是实现项目集成GitLab功能自动化的关键。</p>
+<p>有关Private Token的请求方式我们可以在官方的文档上找到，需要提供login和password参数，分别代表用户名（账号）和密码，使用POST方式。</p>
+<pre><code>private String getPrivateToken() throws IOException {
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpPost httpPost = new HttpPost(&quot;http://xxx.xxx.xxx/api/v4/session&quot;);
+
+    List&lt;NameValuePair&gt; formparams = new ArrayList&lt;NameValuePair&gt;();
+    formparams.add(new BasicNameValuePair(&quot;login&quot;, &quot;xxx&quot;));
+    formparams.add(new BasicNameValuePair(&quot;password&quot;, &quot;xxx&quot;));
+
+    UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
+
+    httpPost.setEntity(encodedFormEntity);
+
+    System.out.println(httpPost);
+
+    CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+    HttpEntity entity = httpResponse.getEntity();
+
+    String privateToken = EntityUtils.toString(entity);
+    System.out.println(privateToken);
+
+    return privateToken;
+}</code></pre><p>如果你是用的是OKHttp或是HttpURLConnection，建议先使用PostMan进行测试后直接复制请求代码或是按照生成的请求内容构造请求。</p>
+<h4 id="新建项目仓库"><a href="#新建项目仓库" class="headerlink" title="新建项目仓库"></a>新建项目仓库</h4><p>新建项目仓库是最为基本的一个功能，API调用也比较简单。</p>
+<p>我们需要提供的必要参数是项目仓库名和项目仓库路径，此外还需要之前提到的Private Token用于身份认证。当然，在创建仓库时你还可以设置很多东西，有很多参数可以选择，具体内容请参考官方文档。</p>
+<pre><code>public ProjectInformation createRepo(String userID, String projectName, String description) throws IOException, JSONException {
+    String privateToken = &quot;xxxxxxxxxxxxxxxxxxx&quot;;
+    String url = &quot;http://xxx.xxx.xxx/api/v4/projects&quot;;
+
+    List&lt;NameValuePair&gt; formparams = new ArrayList&lt;NameValuePair&gt;();
+    formparams.add(new BasicNameValuePair(&quot;name&quot;, projectName));
+    formparams.add(new BasicNameValuePair(&quot;path&quot;, projectName));
+    formparams.add(new BasicNameValuePair(&quot;description&quot;, description));
+
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpPost httpPost = new HttpPost(url);
+
+    UrlEncodedFormEntity encodedFormEntity = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
+
+    httpPost.setHeader(&quot;PRIVATE-TOKEN&quot;, privateToken);
+    httpPost.setEntity(encodedFormEntity);
+    CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+    HttpEntity entity = httpResponse.getEntity();
+
+    String message = EntityUtils.toString(entity);
+
+    JSONObject jsonObject = JSONObject.parseObject(message);
+
+    String projectID = jsonObject.getString(&quot;id&quot;);
+    Timestamp createTime = jsonObject.getTimestamp(&quot;created_at&quot;);
+
+    ProjectInformation projectInformation = new ProjectInformation();
+    projectInformation.setProjId(projectID);
+    projectInformation.setCreateTime(createTime);
+    projectInformation.setOwnerUserId(userID);
+    projectInformation.setProjName(projectName);
+
+    return projectInformation;
+}</code></pre><p>如果创建成功，那么你会得到回复的新建的项目仓库的信息，包括id、创建时间等等。</p>
+<h4 id="删除项目仓库"><a href="#删除项目仓库" class="headerlink" title="删除项目仓库"></a>删除项目仓库</h4><p>删除项目仓库也是比较常用的功能，API调用也不复杂。</p>
+<p>我们需要提供的必要参数是项目仓库的ID，此外还需要之前提到的Private Token用于身份认证。这里需要注意的是，由于请求该API需要使用DELETE方法，但是DELETE的传参比较复杂，建议直接将参数项目仓库ID拼接到URL上使用。</p>
+<pre><code>public boolean deleteRepo(String projectID) throws IOException {
+    String privateToken = &quot;xxxxxxxxxxxxxxxxxxx&quot;;
+    String url = &quot;http://xxx.xxx.xxx/api/v4/projects/&quot; + projectID;
+
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+
+    HttpDelete httpDelete = new HttpDelete(url);
+    httpDelete.setHeader(&quot;PRIVATE-TOKEN&quot;, privateToken);
+
+    CloseableHttpResponse httpResponse = httpClient.execute(httpDelete);
+
+    System.out.println(EntityUtils.toString(httpResponse.getEntity()));
+
+    return true;
+}</code></pre><h4 id="向项目仓库提交文件"><a href="#向项目仓库提交文件" class="headerlink" title="向项目仓库提交文件"></a>向项目仓库提交文件</h4><p>对一次提交一个和多个内容，GITLab API提供了不同的接口，这里拿提交一个内容进行举例。</p>
+<p>我们需要提供的必要参数是项目仓库ID、分支名、文件内容以及提交信息与说明，此外还需要之前提到的Private Token用于身份认证，使用POST方法。</p>
+<p>这里需要注意的是，我们提供的参数应该包含在一个JSON字符串中，即请求中提交的参数应该是application/json类型。</p>
+<pre><code>public boolean uploadFile(String projectID, File uploadFile) throws IOException {
+
+    String privateToken = &quot;xxxxxxxxxxxxxxxxx&quot;;
+    String url = &quot;http://xxx.xxx.xxx/api/v4/projects/5/repository/files/&quot; + uploadFile.getName();
+
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpPost httpPost = new HttpPost(url);
+
+    httpPost.setConfig(requestConfig);
+
+    String fileContent = FileUtils.readFileToString(uploadFile, &quot;utf-8&quot;);
+
+    net.minidev.json.JSONObject jsonObject = new net.minidev.json.JSONObject();
+    jsonObject.appendField(&quot;branch&quot;, &quot;master&quot;);
+    jsonObject.appendField(&quot;content&quot;, fileContent);
+    jsonObject.appendField(&quot;commit_message&quot;, &quot;New Code File&quot;);
+
+    String json = jsonObject.toJSONString();
+
+    System.out.println(json);
+
+    StringEntity requestEntity = new StringEntity(json,&quot;utf-8&quot;);
+    requestEntity.setContentType(&quot;application/json&quot;);
+
+    httpPost.addHeader(&quot;PRIVATE-TOKEN&quot;, privateToken);
+    httpPost.setEntity(requestEntity);
+    CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+    HttpEntity entity = httpResponse.getEntity();
+
+    String message = EntityUtils.toString(entity);
+
+    System.out.println(message);
+
+    return true;
+}</code></pre><p>那么这次的分享到这里就结束了，希望对大家的学习有所帮助，拜拜~</p>
 
             </div>
             <hr/>
@@ -525,7 +598,7 @@ frame.reindex(columns=states)</code></pre></li>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://aun3ma.github.io/2020/05/06/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BDataFrame/">http://aun3ma.github.io/2020/05/06/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BDataFrame/</a>
+                    <a href="http://aun3ma.github.io/2020/05/12/%E5%85%B3%E4%BA%8Egitlab-API/">http://aun3ma.github.io/2020/05/12/%E5%85%B3%E4%BA%8Egitlab-API/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -563,8 +636,8 @@ frame.reindex(columns=states)</code></pre></li>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/pandas/">
-                                    <span class="chip bg-color">pandas</span>
+                                <a href="/tags/GitLab/">
+                                    <span class="chip bg-color">GitLab</span>
                                 </a>
                             
                         </div>
@@ -730,9 +803,10 @@ frame.reindex(columns=states)</code></pre></li>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/05/12/%E5%85%B3%E4%BA%8Egitlab-API/">
                     <div class="card-image">
@@ -751,9 +825,9 @@ GitLab API提供哪些功能GitLab是一个十分成熟的平台，其提供的A
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -766,6 +840,7 @@ GitLab API提供哪些功能GitLab是一个十分成熟的平台，其提供的A
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -784,38 +859,36 @@ GitLab API提供哪些功能GitLab是一个十分成熟的平台，其提供的A
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/29/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AD%A6%E4%B9%A0-%E8%AE%A4%E8%AF%86%E8%81%9A%E7%B1%BB/">
+                <a href="/2020/05/06/python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BDataFrame/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="数据分析与挖掘-认识聚类">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="python数据结构之DataFrame">
                         
-                        <span class="card-title">数据分析与挖掘-认识聚类</span>
+                        <span class="card-title">python数据结构之DataFrame</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            最近做了一个聚类作业，初步了解了一些聚类算法，这里和大家分享一下。
-使用python语言。
-作业数据与资料戳这里下载
-Q1Q1比较简单，对于数据做必要处理后直接使用K-Means即可，唯一的问题是大部分的库中的K-Means算法不支持自定义
+                            最近学习了python的pandas库的相关知识，今天来和大家介绍一下其中的DataFrame数据结构。
+什么是PandasPandas是基于Numpy的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Python/" class="post-category">
-                                    Python
+                            <a href="/categories/python/" class="post-category">
+                                    python
                                 </a>
                             
-                            <a href="/categories/%E8%81%9A%E7%B1%BB/" class="post-category">
-                                    聚类
+                            <a href="/categories/python/pandas/" class="post-category">
+                                    pandas
                                 </a>
                             
                             
@@ -825,12 +898,8 @@ Q1Q1比较简单，对于数据做必要处理后直接使用K-Means即可，唯
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%81%9A%E7%B1%BB/">
-                        <span class="chip bg-color">聚类</span>
-                    </a>
-                    
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
+                    <a href="/tags/pandas/">
+                        <span class="chip bg-color">pandas</span>
                     </a>
                     
                 </div>
